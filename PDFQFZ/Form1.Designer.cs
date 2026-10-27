@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System;
+using PDFQFZ.Library;
 
 namespace PDFQFZ
 {
@@ -36,7 +37,6 @@ namespace PDFQFZ
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.bt_gz = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.pathText = new System.Windows.Forms.TextBox();
@@ -439,7 +439,8 @@ namespace PDFQFZ
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Image = ResourceAssetLoader.LoadBitmap(
+                "PDFQFZ.Assets.pictureBox2.png");
             this.pictureBox2.Location = new System.Drawing.Point(588, 308);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(153, 168);
@@ -451,7 +452,8 @@ namespace PDFQFZ
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Image = ResourceAssetLoader.LoadBitmap(
+                "PDFQFZ.Assets.pictureBox1.png");
             this.pictureBox1.Location = new System.Drawing.Point(540, 50);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(381, 500);
@@ -740,11 +742,13 @@ namespace PDFQFZ
             this.Controls.Add(this.pathText);
             this.Controls.Add(this.bt_gz);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ResourceAssetLoader.LoadIcon(
+                "PDFQFZ.Assets.logo.ico");
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "PDF加盖骑缝章(v1.33 AI加强版)";
+            this.Text = "PDF加盖骑缝章 v1.33 - PDFium修复版";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

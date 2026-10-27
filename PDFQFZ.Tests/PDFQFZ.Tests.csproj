@@ -19,6 +19,7 @@
   <ItemGroup>
     <Compile Include="..\PDFQFZ\Library\CommandLineFileLoader.cs" Link="CommandLineFileLoader.cs" />
     <Compile Include="..\PDFQFZ\Library\PageCache.cs" Link="PageCache.cs" />
+    <Compile Include="..\PDFQFZ\Library\OutputFileSafety.cs" Link="OutputFileSafety.cs" />
     <Compile Include="..\PDFQFZ\Library\StampPlacementPolicy.cs" Link="StampPlacementPolicy.cs" />
     <Compile Include="..\PDFQFZ\Library\StampRenderPolicy.cs" Link="StampRenderPolicy.cs" />
     <Compile Include="..\PDFQFZ\Library\PreviewPanelLayout.cs" Link="PreviewPanelLayout.cs" />

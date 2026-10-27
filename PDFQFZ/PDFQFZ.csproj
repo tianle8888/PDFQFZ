@@ -9,6 +9,7 @@
     <RootNamespace>PDFQFZ</RootNamespace>
     <AssemblyName>$(RootNamespace)</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <RuntimeIdentifiers>win;win-x64;win-x86</RuntimeIdentifiers>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -75,9 +76,6 @@
     <StartupObject>PDFQFZ.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="O2S.Components.PDFRender4NET">
-      <HintPath>..\..\..\..\..\Downloads\O2S.Components.PDFRender4NET.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -94,6 +92,8 @@
     <Compile Include="Library\FolderSelectDialog.cs" />
     <Compile Include="Library\IniFileHelper.cs" />
     <Compile Include="Library\PageCache.cs" />
+    <Compile Include="Library\OutputFileSafety.cs" />
+    <Compile Include="Library\PdfiumPageRenderer.cs" />
     <Compile Include="Library\PreviewPanelLayout.cs" />
     <Compile Include="Library\StampPlacementPolicy.cs" />
     <Compile Include="Library\StampRenderPolicy.cs" />
@@ -101,18 +101,11 @@
     <Compile Include="Library\PreviewOverlayRequestGate.cs" />
     <Compile Include="Library\PreviewStampLayout.cs" />
     <Compile Include="Library\PreviewValueSanitizer.cs" />
+    <Compile Include="Library\ResourceAssetLoader.cs" />
     <Compile Include="Library\WhiteTransparencyHelper.cs" />
+    <Compile Include="Library\X509Certificate2RsaSignature.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <Content Include="app.config" />
     <None Include="pdfqfz.pfx" />
     <None Include="Properties\app.manifest" />
@@ -135,6 +128,20 @@
     <Content Include="logo.ico" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="logo.ico">
+      <LogicalName>PDFQFZ.Assets.logo.ico</LogicalName>
+      <WithCulture>false</WithCulture>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\pictureBox1.png">
+      <LogicalName>PDFQFZ.Assets.pictureBox1.png</LogicalName>
+      <WithCulture>false</WithCulture>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\pictureBox2.png">
+      <LogicalName>PDFQFZ.Assets.pictureBox2.png</LogicalName>
+      <WithCulture>false</WithCulture>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.8 %28x86 和 x64%29</ProductName>
@@ -155,6 +162,25 @@
     <PackageReference Include="iTextSharp">
       <Version>5.5.13.1</Version>
     </PackageReference>
+    <PackageReference Include="bblanchon.PDFium.Win32" GeneratePathProperty="true">
+      <Version>158.0.8125</Version>
+      <ExcludeAssets>all</ExcludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(Pkgbblanchon_PDFium_Win32)\runtimes\win-x64\native\pdfium.dll">
+      <LogicalName>PDFQFZ.Native.x64.pdfium.dll</LogicalName>
+      <WithCulture>false</WithCulture>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(Pkgbblanchon_PDFium_Win32)\runtimes\win-x86\native\pdfium.dll">
+      <LogicalName>PDFQFZ.Native.x86.pdfium.dll</LogicalName>
+      <WithCulture>false</WithCulture>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(Pkgbblanchon_PDFium_Win32)\runtimes\win-arm64\native\pdfium.dll">
+      <LogicalName>PDFQFZ.Native.arm64.pdfium.dll</LogicalName>
+      <WithCulture>false</WithCulture>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
