@@ -1558,10 +1558,17 @@ namespace PDFQFZ
             string mergedTemporaryPath =
                 OutputFileSafety.CreateTemporaryPath(pdfPath);
             string signedTemporaryPath = null;
+            string renderPath = pdfPath;
+            bool deleteRenderPath = false;
             try
             {
+                renderPath =
+                    PdfAnnotationFlattener.CreateFlattenedCopyForRendering(
+                        pdfPath,
+                        pdfpassword,
+                        out deleteRenderPath);
                 using (PdfiumPageRenderer pdfFile =
-                    PdfiumPageRenderer.Open(pdfPath, pdfpassword))
+                    PdfiumPageRenderer.Open(renderPath, pdfpassword))
                 {
                     bitmaps = new Bitmap[pdfFile.PageCount];
                     for (int i = 0; i < pdfFile.PageCount; i++)
@@ -1690,6 +1697,10 @@ namespace PDFQFZ
                     mergedTemporaryPath);
                 OutputFileSafety.TryDelete(
                     signedTemporaryPath);
+                if (deleteRenderPath)
+                {
+                    PdfAnnotationFlattener.TryDelete(renderPath);
+                }
             }
         }
         //建一个全局的目录变量

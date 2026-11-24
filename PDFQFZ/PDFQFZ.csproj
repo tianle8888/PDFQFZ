@@ -93,6 +93,7 @@
     <Compile Include="Library\IniFileHelper.cs" />
     <Compile Include="Library\PageCache.cs" />
     <Compile Include="Library\OutputFileSafety.cs" />
+    <Compile Include="Library\PdfAnnotationFlattener.cs" />
     <Compile Include="Library\PdfiumPageRenderer.cs" />
     <Compile Include="Library\PreviewPanelLayout.cs" />
     <Compile Include="Library\StampPlacementPolicy.cs" />
